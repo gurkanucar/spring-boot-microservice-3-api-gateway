@@ -1,6 +1,6 @@
 package com.gucardev.springbootmicroservice3apigateway.security;
 
-import com.gucardev.springbootmicroservice3apigateway.UserService;
+import com.gucardev.springbootmicroservice3apigateway.service.UserService;
 import com.gucardev.springbootmicroservice3apigateway.model.User;
 import com.gucardev.springbootmicroservice3apigateway.util.SecurityUtils;
 import org.springframework.security.core.GrantedAuthority;

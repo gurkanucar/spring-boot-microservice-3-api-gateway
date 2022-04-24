@@ -1,4 +1,4 @@
-package com.gucardev.springbootmicroservice3apigateway;
+package com.gucardev.springbootmicroservice3apigateway.service;
 
 import com.gucardev.springbootmicroservice3apigateway.model.Role;
 import com.gucardev.springbootmicroservice3apigateway.model.User;
