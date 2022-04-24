@@ -1,6 +1,7 @@
 package com.gucardev.springbootmicroservice3apigateway.config;
 
 import com.gucardev.springbootmicroservice3apigateway.security.CustomUserDetailsService;
+import com.gucardev.springbootmicroservice3apigateway.security.jwt.JwtAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,11 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final PasswordEncoder passwordEncoder;
+    private final JwtAuthorizationFilter jwtAuthorizationFilter;
 
     public SecurityConfig(CustomUserDetailsService customUserDetailsService,
-                          PasswordEncoder passwordEncoder) {
+                          PasswordEncoder passwordEncoder, JwtAuthorizationFilter jwtAuthorizationFilter) {
         this.customUserDetailsService = customUserDetailsService;
         this.passwordEncoder = passwordEncoder;
+        this.jwtAuthorizationFilter = jwtAuthorizationFilter;
     }
 
     @Override
@@ -41,6 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/authentication/**") // for login and register
                 .permitAll()
                 .anyRequest().authenticated();
+
+        http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
