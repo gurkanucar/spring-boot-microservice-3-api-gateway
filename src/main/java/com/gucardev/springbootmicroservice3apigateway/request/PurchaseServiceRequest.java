@@ -5,7 +5,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(value = "purchase-service", path = "/api/purchase", url = "http://localhost:8082", configuration = FeignConfiguration.class)
+@FeignClient(value = "purchase-service",
+        path = "/api/purchase",
+        //url = "http://localhost:8082",
+
+        configuration = FeignConfiguration.class)
 public interface PurchaseServiceRequest {
 
     @PostMapping  //api/purchase

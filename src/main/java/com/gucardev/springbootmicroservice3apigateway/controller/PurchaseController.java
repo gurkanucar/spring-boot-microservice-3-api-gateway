@@ -17,15 +17,17 @@ public class PurchaseController {
         this.purchaseServiceRequest = purchaseServiceRequest;
     }
 
+
     @PostMapping//gateway/purchase
-    public ResponseEntity<?> savePurchase(@RequestBody Object purchase)
-    {
+    public ResponseEntity<?> savePurchase(@RequestBody Object purchase) {
         return new ResponseEntity<>(purchaseServiceRequest.savePurchase(purchase), HttpStatus.CREATED);
     }
 
+
     @GetMapping//gateway/purchase
-    public ResponseEntity<?> getAllPurchasesOfAuthorizedUser(@AuthenticationPrincipal UserPrincipal userPrincipal)
-    {
+    public ResponseEntity<?> getAllPurchasesOfAuthorizedUser(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         return ResponseEntity.ok(purchaseServiceRequest.getAllPurchasesOfUser(userPrincipal.getId()));
     }
+
+
 }

@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(value = "course-service", path = "/api/course", url = "http://localhost:8081", configuration = FeignConfiguration.class)
+@FeignClient(value = "course-service",
+        path = "/api/course",
+        //url = "http://localhost:8081",
+        configuration = FeignConfiguration.class)
 public interface CourseServiceRequest {
 
     @PostMapping
