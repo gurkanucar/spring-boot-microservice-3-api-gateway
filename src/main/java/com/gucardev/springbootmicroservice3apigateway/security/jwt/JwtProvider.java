@@ -90,7 +90,7 @@ public class JwtProvider {
                 .setSigningKey(key)
                 .build();
 
-        return parsedJwt.parseClaimsJwt(token).getBody();
+        return parsedJwt.parseClaimsJws(token).getBody();
     }
 
 }
