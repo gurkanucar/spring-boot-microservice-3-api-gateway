@@ -1,9 +1,11 @@
 package com.gucardev.springbootmicroservice3apigateway.config;
 
+import com.gucardev.springbootmicroservice3apigateway.model.Role;
 import com.gucardev.springbootmicroservice3apigateway.security.CustomUserDetailsService;
 import com.gucardev.springbootmicroservice3apigateway.security.jwt.JwtAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -42,8 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeHttpRequests()
-                .antMatchers("/api/authentication/**") // for login and register
-                .permitAll()
+                .antMatchers("/api/authentication/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/gateway/course").permitAll()
+                .antMatchers(HttpMethod.GET, "/gateway/course/**").hasRole(Role.ADMIN.name())
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
