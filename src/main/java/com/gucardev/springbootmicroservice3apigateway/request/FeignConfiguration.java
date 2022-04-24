@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class FeignConfiguration {
 
     @Bean
-    public BasicAuthRequestInterceptor basicAuthRequestInterceptor(@Value("${service.security-secure-key-username}") String username,
-                                                                   @Value("${service.security-secure-key-password}") String password) {
+    public BasicAuthRequestInterceptor basicAuthRequestInterceptor(@Value("${service.security.secure-key-username}") String username,
+                                                                   @Value("${service.security.secure-key-password}") String password) {
         return new BasicAuthRequestInterceptor(username, password);
     }
 
